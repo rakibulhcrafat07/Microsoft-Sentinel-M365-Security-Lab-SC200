@@ -173,4 +173,4 @@ Bastion and the test VM are billed hourly, so both were deleted immediately afte
 
 ---
 
-*Part of [Zero-to-SOC: A Self-Funded, Multi-Certification Cloud Security Lab](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab)*
+*Part of [Zero-to-SOC: A Self-Funded, Multi-Certification Cloud Security Lab](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200)*

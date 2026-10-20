@@ -11,7 +11,7 @@ Rather than keeping the three certification tracks (M365 Admin, SC-200, AZ-104) 
 ## Project 3 — Identity Security (MFA, Conditional Access) ✅ Complete
 `[M365]` `[SC-200]` `[AZ-104]`
 
-Full detail: [`project-3-identity-security/README.md`](./project-3-identity-security/README.md)
+Full detail: [`project-03-identity-security/README.md`](./project-03-identity-security/README.md)
 
 - [x] Enable per-user MFA and test-login to verify it
 - [x] Conditional Access policy — require MFA for a specific group

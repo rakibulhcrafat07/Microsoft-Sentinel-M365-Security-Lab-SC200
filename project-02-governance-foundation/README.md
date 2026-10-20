@@ -1,7 +1,7 @@
 # Project 2 — Tenant, Users & Governance Foundation
 
 **Part of: [Zero-to-SOC](../README.md) — a self-funded, multi-certification cloud security lab**
-**◀ Previous: [Project 1 — Environment Setup & Cross-Tenant Recovery](../project-1-environment-setup/README.md)**
+**◀ Previous: [Project 1 — Environment Setup & Cross-Tenant Recovery](../project-01-environment-setup/README.md)**
 
 This document is the full, unabridged record of Project 2 — every sub-task, in order, with the screenshot that proves it happened. It's longer than a highlight reel on purpose: the goal is a complete reference to look back on, not a marketing summary.
 

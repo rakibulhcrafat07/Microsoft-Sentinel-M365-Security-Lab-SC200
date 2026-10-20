@@ -1,6 +1,6 @@
 # Project 11 — Compliance (Microsoft Purview)
 
-**Part of the [Zero-to-SOC](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab) self-funded cloud security lab — targeting Microsoft 365 Administration, SC-200, and AZ-104 certifications.**
+**Part of the [Zero-to-SOC](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200) self-funded cloud security lab — targeting Microsoft 365 Administration, SC-200, and AZ-104 certifications.**
 
 Tenant: `BOL959.onmicrosoft.com` | Portal: `purview.microsoft.com` | Licensing: Free-tier Microsoft 365 + trial licenses
 

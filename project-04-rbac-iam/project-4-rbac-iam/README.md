@@ -163,4 +163,4 @@ Added a **Delete** lock on `RG-Phase1-Lab`.
 
 ---
 
-**Next:** Full roadmap: [`ROADMAP.md`](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/ROADMAP.md)
+**Next:** Full roadmap: [`ROADMAP.md`](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/ROADMAP.md)

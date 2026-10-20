@@ -20,7 +20,8 @@
 - [Project 8 — Mail Room: Exchange & Defender for Office 365](#project-8--mail-room-exchange--defender-for-office-365-m365--sc-200)
 - [Project 9 — Device & Endpoint (Intune + Microsoft Defender for Endpoint)](#project-9--device--endpoint-intune--microsoft-defender-for-endpoint-sc-200--az-104)
 - [Project 10 — Collaboration & Cloud App Security](#project-10--collaboration--cloud-app-security-m365--sc-200)
-- [Key learnings across all ten projects](#key-learnings-across-all-ten-projects)
+- [Project 11 — Compliance (Microsoft Purview)](#project-11--compliance-microsoft-purview-m365--sc-200)
+- [Key learnings across all eleven projects](#key-learnings-across-all-eleven-projects)
 - [Roadmap — upcoming projects](#roadmap--upcoming-projects)
 - [About](#about)
 
@@ -53,7 +54,7 @@ Every stage is called a **Project** rather than a "phase" or "module," because t
 
 **Goal:** provision every license and service needed for the lab, on trial/free tiers only, with zero ongoing cost.
 
-**📄 Full detail (16 screenshots, every sub-step documented): [`project-01-environment-setup/README.md`](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-01-environment-setup/README.md)**
+**📄 Full detail (16 screenshots, every sub-step documented): [`project-01-environment-setup/README.md`](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-01-environment-setup/README.md)**
 
 This project turned out to be less "click next a few times" and more "diagnose three separate problems in sequence":
 
@@ -63,7 +64,7 @@ This project turned out to be less "click next a few times" and more "diagnose t
 - **The real problem** — discovered the first Sentinel workspace had been built in a completely different tenant than the one holding every license, since Azure and M365 sign-ins don't make the active tenant obvious
 - **Recovery** — rebuilt Sentinel from scratch in the correct tenant and verified all 7 Defender XDR connectors reporting Connected
 
-[![All 7 Defender XDR connectors verified in the correct tenant](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/raw/main/project-01-environment-setup/images/15_final_connectors_connected.png)](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-01-environment-setup/images/15_final_connectors_connected.png)
+[![All 7 Defender XDR connectors verified in the correct tenant](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/raw/main/project-01-environment-setup/images/15_final_connectors_connected.png)](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-01-environment-setup/images/15_final_connectors_connected.png)
 *The moment that confirmed the rebuild worked — same tenant, fully integrated.*
 
 ---
@@ -72,7 +73,7 @@ This project turned out to be less "click next a few times" and more "diagnose t
 
 **Goal:** populate the now-correctly-scoped tenant with test identities and governance structures, and stand up the equivalent Azure administrative foundation.
 
-**📄 Full detail (26 screenshots, every sub-step documented): [`project-02-governance-foundation/README.md`](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-02-governance-foundation/README.md)**
+**📄 Full detail (26 screenshots, every sub-step documented): [`project-02-governance-foundation/README.md`](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-02-governance-foundation/README.md)**
 
 Summary of what was built:
 
@@ -82,7 +83,7 @@ Summary of what was built:
 - **Dynamic Group** — a real debugging story: the M365 admin center's group wizard only supports Assigned membership; dynamic rules had to be configured separately in the Entra admin center (`(user.department -eq "IT")`), and membership evaluation turned out to be asynchronous rather than instant
 - **Azure governance foundation** — explored the Management Group → Subscription hierarchy, then created a tagged Resource Group (`environment: lab`, `owner: rakibul`) as the scoping unit for every later Azure project
 
-[![Dynamic membership rule configured in Entra admin center](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/raw/main/project-02-governance-foundation/images/19-dynamic-rule-syntax.png)](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-02-governance-foundation/images/19-dynamic-rule-syntax.png)
+[![Dynamic membership rule configured in Entra admin center](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/raw/main/project-02-governance-foundation/images/19-dynamic-rule-syntax.png)](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-02-governance-foundation/images/19-dynamic-rule-syntax.png)
 *The one screenshot that matters most from this project — the M365 admin center simply doesn't expose this screen.*
 
 ---
@@ -91,7 +92,7 @@ Summary of what was built:
 
 **Goal:** move beyond password-only sign-in by layering per-user MFA, group-scoped Conditional Access, location-based access, and risk-based policies on top of the Project 1–2 tenant — then verify with logs that the policies actually fire.
 
-**📄 Full detail (31 screenshots, every sub-step documented): [`project-03-identity-security/README.md`](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-03-identity-security/README.md)**
+**📄 Full detail (31 screenshots, every sub-step documented): [`project-03-identity-security/README.md`](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-03-identity-security/README.md)**
 
 Summary of what was built:
 
@@ -101,7 +102,7 @@ Summary of what was built:
 - **CA03 / CA04** — sign-in risk and user risk policies, rebuilt as Conditional Access after discovering the classic Identity Protection risk policy pages are being retired October 1, 2026
 - **Verification** — 5 deliberate failed logins, confirmed end-to-end via Sign-in logs (error `50126`) and the Conditional Access Policy Impact tab, all policies kept in **Report-only** throughout
 
-[![All four Conditional Access policies, Report-only](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/raw/main/project-03-identity-security/images/06_all_4_ca_policies.png)](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-03-identity-security/images/06_all_4_ca_policies.png)
+[![All four Conditional Access policies, Report-only](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/raw/main/project-03-identity-security/images/06_all_4_ca_policies.png)](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-03-identity-security/images/06_all_4_ca_policies.png)
 *CA01 through CA04, all evaluated in Report-only mode before anything gets enforced.*
 
 ---
@@ -110,7 +111,7 @@ Summary of what was built:
 
 **Goal:** move from "everyone is Global Admin / Owner" to scoped, least-privilege access — per-role M365 admin delegation, PIM just-in-time activation, Azure RBAC (built-in and custom), and a hard guardrail (Resource Lock) that survives even Owner-level access.
 
-**📄 Full detail (22 screenshots, every sub-step documented): [`project-04-rbac-iam/README.md`](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-04-rbac-iam/README.md)**
+**📄 Full detail (22 screenshots, every sub-step documented): [`project-04-rbac-iam/README.md`](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-04-rbac-iam/README.md)**
 
 Summary of what was built:
 
@@ -121,7 +122,7 @@ Summary of what was built:
 - **Custom RBAC role** ("VM Operator") — built from just 3 Actions (start/restart/stop); the assigned user hit a 401 even opening the resource group blade, since narrowly-scoped custom roles don't inherit the generic `resourceGroups/read` permission that Reader carries as a wildcard
 - **Resource Lock** — a Delete lock that blocked deletion even when attempted from the tenant's own Global Administrator / Owner account
 
-[![Delete blocked by lock, even for the account's own Owner role](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/raw/main/project-04-rbac-iam/images/s24_delete_blocked_by_lock.png)](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-04-rbac-iam/images/s24_delete_blocked_by_lock.png)
+[![Delete blocked by lock, even for the account's own Owner role](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/raw/main/project-04-rbac-iam/images/s24_delete_blocked_by_lock.png)](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-04-rbac-iam/images/s24_delete_blocked_by_lock.png)
 *Locks sit above RBAC entirely — no role assignment, however privileged, overrides one.*
 
 ---
@@ -130,7 +131,7 @@ Summary of what was built:
 
 **Goal:** move from access-control theory into a mechanic AZ-104 tests directly — Blob storage and tiering, a real mountable Azure File Share, scoped time-boxed access via SAS tokens, an automated cost-lifecycle policy, and soft delete recovery — each one tested end-to-end rather than just configured and screenshotted.
 
-**📄 Full detail (38 screenshots, every sub-step documented): [`project-05-storage-management/README.md`](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-05-storage-management/README.md)**
+**📄 Full detail (38 screenshots, every sub-step documented): [`project-05-storage-management/README.md`](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-05-storage-management/README.md)**
 
 Summary of what was built:
 
@@ -141,7 +142,7 @@ Summary of what was built:
 - **Lifecycle management policy** — a single rule automating the full cost lifecycle: 30 days → Cool, 90 days → Archive, 365 days → Delete
 - **Soft delete** — deleted a blob on purpose, confirmed it disappeared from the container's default "active blobs" view, then recovered it via Undelete with identical hash, tier, and size intact
 
-[![SAS URL opened directly in a private browser tab, no login required](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/raw/main/project-05-storage-management/images/24_sas-url-tested-in-browser.png)](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-05-storage-management/images/24_sas-url-tested-in-browser.png)
+[![SAS URL opened directly in a private browser tab, no login required](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/raw/main/project-05-storage-management/images/24_sas-url-tested-in-browser.png)](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-05-storage-management/images/24_sas-url-tested-in-browser.png)
 *Read-only, time-boxed, zero credentials exchanged — the SAS token doing exactly what it's supposed to.*
 
 ---
@@ -150,7 +151,7 @@ Summary of what was built:
 
 **Goal:** build the core network layer for the lab — a segmented VNet, a security-group-filtered subnet, a public IP, peered connectivity between two VNets, and Azure Bastion for remote access that never requires a VM to carry its own public IP. AWS VPC was dropped from this phase entirely; the lab stays Azure/Microsoft-only going forward.
 
-**📄 Full detail (90 screenshots, every sub-step documented): [`project-06-networking-full/README.md`](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-06-networking-full/README.md)**
+**📄 Full detail (90 screenshots, every sub-step documented): [`project-06-networking-full/README.md`](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-06-networking-full/README.md)**
 
 Summary of what was built:
 
@@ -162,7 +163,7 @@ Summary of what was built:
 
 Along the way: a home ISP that rotated its public IP mid-session and broke the just-configured NSG rule, three VM sizes rejected as unavailable before one finally deployed, and a resource-group Delete lock (left over from Project 4) that silently blocked the cleanup until it was found, lifted, and restored afterward.
 
-[![Connected via Bastion — a live shell, no public IP on the VM](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/raw/main/project-06-networking-full/images/078.png)](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-06-networking-full/images/078.png)
+[![Connected via Bastion — a live shell, no public IP on the VM](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/raw/main/project-06-networking-full/images/078.png)](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-06-networking-full/images/078.png)
 *azureuser@vm-test-linux:~$ — proof the connection works without the VM ever being exposed to the internet.*
 
 ---
@@ -171,7 +172,7 @@ Along the way: a home ISP that rotated its public IP mid-session and broke the j
 
 **Goal:** stand up the core compute layer on top of the Project 6 network — a Windows Server VM and a Linux VM, resized and snapshotted like real production workloads — then deliberately promote the Windows VM to an Active Directory Domain Controller so it generates the kind of real, on-prem-style identity telemetry that Microsoft Defender for Identity is actually built to monitor, rather than relying on synthetic data.
 
-**📄 Full detail (all steps documented): [`project-07-azure-compute/README.md`](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-07-azure-compute/README.md)**
+**📄 Full detail (all steps documented): [`project-07-azure-compute/README.md`](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-07-azure-compute/README.md)**
 
 Summary of what was built:
 
@@ -192,7 +193,7 @@ Along the way: a first-time Defender for Identity workspace provisioning failure
 
 **Goal:** build and secure the mail layer of the tenant — a shared mailbox, a mail flow rule, and message trace verification in Exchange admin center, followed by custom anti-phishing, anti-spam, and anti-malware policies, a real EICAR anti-malware detection test, a Safe Links URL-scanning test, and a full end-to-end phishing attack simulation in Microsoft Defender for Office 365.
 
-**📄 Full detail (99 screenshots, every sub-step documented): [`project-08-mail-protection/README.md`](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-08-mail-protection/README.md)**
+**📄 Full detail (99 screenshots, every sub-step documented): [`project-08-mail-protection/README.md`](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-08-mail-protection/README.md)**
 
 Summary of what was built:
 
@@ -206,7 +207,7 @@ Summary of what was built:
 
 Along the way: two real backend errors were hit and resolved — an anti-phishing policy that failed to save until an explicit quarantine policy was selected for the "Quarantine the message" action, and a browser that opened the EICAR test file as plain text instead of downloading it, fixed by using the official zipped package instead.
 
-[![Quarantine list confirms the anti-malware policy caught the EICAR test file](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/raw/main/project-08-mail-protection/images/86.png)](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-08-mail-protection/images/86.png)
+[![Quarantine list confirms the anti-malware policy caught the EICAR test file](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/raw/main/project-08-mail-protection/images/86.png)](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-08-mail-protection/images/86.png)
 *Quarantine reason: Malware — direct proof that the custom anti-malware policy built earlier in this project is actually working.*
 
 ---
@@ -215,7 +216,7 @@ Along the way: two real backend errors were hit and resolved — an anti-phishin
 
 **Goal:** stand up an Intune baseline for Windows devices (compliance + configuration), onboard the Project 7 domain controller VM into Microsoft Defender for Endpoint, and explore the Exposure Management / Vulnerability Management dashboards.
 
-**📄 Full detail (48 screenshots, every sub-step documented): [`project-09-device-endpoint/README.md`](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-09-device-endpoint/README.md)**
+**📄 Full detail (48 screenshots, every sub-step documented): [`project-09-device-endpoint/README.md`](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-09-device-endpoint/README.md)**
 
 Summary of what was built:
 
@@ -227,7 +228,7 @@ Summary of what was built:
 
 Along the way: the profile-type dropdown initially accepted "Templates" — a category header, not an actual policy type — as a valid selection; the Real-time protection toggle stayed greyed out until its parent Microsoft Defender Antimalware setting was turned on first; a Settings Catalog checkbox added a setting to the profile without actually setting its value; the Defender onboarding package was first generated for the wrong OS family (Windows 10/11 instead of Windows Server 2019/2022/2025); and the freshly onboarded VM briefly appeared as two separate entries in Device Inventory.
 
-[![vm-win-addc successfully onboarded into Microsoft Defender for Endpoint](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/raw/main/project-09-device-endpoint/images/48.png)](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-09-device-endpoint/images/48.png)
+[![vm-win-addc successfully onboarded into Microsoft Defender for Endpoint](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/raw/main/project-09-device-endpoint/images/48.png)](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-09-device-endpoint/images/48.png)
 *The domain controller built back in Project 7 is now a monitored endpoint, not just an identity source.*
 
 ---
@@ -236,7 +237,7 @@ Along the way: the profile-type dropdown initially accepted "Templates" — a ca
 
 **Goal:** stand up a standalone SharePoint site and test its external-sharing policy, schedule a Teams meeting with an external guest to compare against SharePoint's sharing behavior, explore Microsoft Defender for Cloud Apps end-to-end (Activity log, App Connectors, Governance), and build a custom File Policy that flags externally-shared files.
 
-**📄 Full detail (62 screenshots, every sub-step documented): [`project-10-collaboration-security/README.md`](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-10-collaboration-security/README.md)**
+**📄 Full detail (62 screenshots, every sub-step documented): [`project-10-collaboration-security/README.md`](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-10-collaboration-security/README.md)**
 
 The concept behind this project: once a file or a meeting leaves an organization's boundary, three separate layers have to work together — the **Policy** set in advance, the **Enforcement** the moment someone actually shares, and the **Visibility** tooling that watches for it afterward. Testing all three back to back on the same data isolated a real fault:
 
@@ -245,12 +246,25 @@ The concept behind this project: once a file or a meeting leaves an organization
 - **Defender for Cloud Apps** — discovered the Office 365 App Connector had never been provisioned (hence an empty Activity log); connecting it immediately produced an HTTP 400 error traced through three different Microsoft Purview surfaces (one retired since November 2024) to a broken Unified Audit Log pipeline
 - **File Policy** — a custom policy (`Flag-Externally-Shared-Files`) built to auto-flag files shared externally or publicly, using a non-destructive "notify file owner" action consistent with this lab's Report-only-first discipline
 
-[![Flag-Externally-Shared-Files policy created and Active](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/raw/main/project-10-collaboration-security/images/62.png)](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/project-10-collaboration-security/images/62.png)
+[![Flag-Externally-Shared-Files policy created and Active](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/raw/main/project-10-collaboration-security/images/62.png)](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-10-collaboration-security/images/62.png)
 *A working File Policy, built despite the audit pipeline issues uncovered earlier in the same project.*
 
 ---
 
-## Key learnings across all ten projects
+## Project 11 — Compliance (Microsoft Purview) (M365 / SC-200)
+
+**Goal:** control what happens to data after it exists — how long it is kept (**Retention**), what happens when sensitive data is detected (**DLP**), and proof of who did what (**Audit**).
+
+**📄 Full detail (59 screenshots, every sub-step documented): [`project-11-compliance/README.md`](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/project-11-compliance/README.md)**
+
+- **Retention policy** — `RP-SharePoint-Retain3Yr`, 3-year SharePoint retention with auto-delete; Adaptive scopes need an E5 license this tenant doesn't have, so a Static scope was used instead
+- **DLP policy** — PCI DSS template detecting credit card numbers on SharePoint/OneDrive, run in Simulation mode (alerts, never blocks)
+- **Detection test** — a dummy card number matched at Low/Medium/High confidence in isolation, but the same file on SharePoint raised no alert after 20+ minutes: SharePoint DLP scans on a backend crawl cycle, not in real time
+- **Unified Audit Log** — checked that admin actions were tracked; the policy-creation events themselves did not appear in search despite both policies being live, documented as found
+
+---
+
+## Key learnings across all eleven projects
 
 1. **Payment failures can be bank-side, not account-side.** A domestic debit card that verifies a one-time Azure hold can still be blocked on a recurring-billing merchant. A dual-currency credit card resolved it reliably.
 2. **Always confirm which tenant is active before provisioning.** Azure and Microsoft 365 sessions can silently diverge into different directories even when the sign-in usernames look identical — this cost an entire rebuild.
@@ -305,14 +319,14 @@ The concept behind this project: once a file or a meeting leaves an organization
 | 8  | Email Security — Exchange + Defender for Office 365              | ✅ Complete          |
 | 9  | Endpoint Security — Intune + Defender for Endpoint               | ✅ Complete          |
 | 10 | Collaboration & Cloud App Security                               | ✅ Complete          |
-| 11 | Data Protection & Compliance                                     | M365 (Next)          |
-| 12 | Monitoring — Azure Monitor + Sentinel                            | AZ-104 / SC-200     |
+| 11 | Data Protection & Compliance                                     | ✅ Complete          |
+| 12 | Monitoring — Azure Monitor + Sentinel                            | AZ-104 / SC-200 (Next) |
 | 13 | KQL (Kusto Query Language)                                       | SC-200              |
 | 14 | Detection Engineering — Analytics Rules                          | SC-200              |
 | 15 | Incident Investigation                                           | SC-200              |
 | 16 | Automation, Backup & Cost Management                             | AZ-104 / SC-200     |
 
-Full task-level detail for every upcoming project: [`ROADMAP.md`](https://github.com/rakibulhcrafat07/Microsoft-365-Azure-Sentinel-SC200-Lab/blob/main/ROADMAP.md)
+Full task-level detail for every upcoming project: [`ROADMAP.md`](https://github.com/rakibulhcrafat07/Microsoft-Sentinel-M365-Security-Lab-SC200/blob/main/ROADMAP.md)
 
 ---
 
