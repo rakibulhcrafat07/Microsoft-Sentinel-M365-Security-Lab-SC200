@@ -102,4 +102,4 @@ A standalone trial for **Defender for Endpoint Plan 2** could not be provisioned
 | Recovery | Rebuilt Sentinel from scratch in the correct tenant | A clean rebuild was faster and safer than trying to migrate/fix the misconfigured workspace |
 | Known limitation | Defender for Endpoint P2 standalone trial never became available | Documenting an unresolved gap honestly is more useful than hiding it — Defender for Business covers the fundamentals in the meantime |
 
-**Next:** [Project 2 — Tenant, Users & Governance Foundation](../project-2-governance-foundation/README.md)
+**Next:** [Project 2 — Tenant, Users & Governance Foundation](../project-02-governance-foundation/README.md)
